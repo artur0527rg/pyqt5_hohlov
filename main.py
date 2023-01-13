@@ -10,14 +10,18 @@ class MyWin(QtWidgets.QMainWindow):
         QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
-        # self.pushButton
         self.ui.pushButton.clicked.connect(self.handler)
+        self.ui.pushButton_2.clicked.connect(self.setcolor)
          
     def handler(self):
-        self.ui.pushButton.setDisabled(True);  time.sleep(5)
+        self.ui.pushButton.setDisabled(True)
         self.ui.plainTextEdit.appendPlainText('text')
         self.ui.label.setText('text')
+
+    def setcolor(self):
+        self.ui.pushButton.setText('11111')
+        self.ui.pushButton.setStyleSheet('background-color: red; color: white;')
+        self.ui.pushButton.setDisabled(False)
         
         
 
