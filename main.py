@@ -11,68 +11,74 @@ class GUI(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.number = 0
+        #Глобальные переменные
+        self.progres_flag = False
+        self.progres_value = 0
+        self.ui.progressBar.setValue(self.progres_value)
 
+        # Оброботчики кнопок
         self.ui.pushButton.clicked.connect(self.add_item)
-        self.ui.pushButton_2.clicked.connect(self.clear_all)
+        self.ui.pushButton_2.clicked.connect(self.clear_box)
+        self.ui.pushButton_3.clicked.connect(self.set_style)
 
-        self.tabel_index = 0
-        self.row_count = 1
-        self.ui.pushButton_3.clicked.connect(self.add_tabel_item)
-        self.ui.pushButton_4.clicked.connect(self.clear_table)
+
 
     def add_item(self):
-        radio_base = [
-            self.ui.radioButton, self.ui.radioButton_2,
-            self.ui.radioButton_3, self.ui.radioButton_4
-        ]
-        for radio in radio_base:
-            if radio.isChecked():
-                name = radio.text()
-                icon = QtGui.QIcon(f'{name}.png')
-                print(f'{name}.png')
-                self.ui.listWidget.addItem(f"{name} - {self.number}")
-                self.ui.listWidget.setCurrentRow(self.number)
-                item = self.ui.listWidget.currentItem()
-                item.setIcon(icon)
-                self.number += 1
+        if len(self.ui.lineEdit.text())>0:
+            # Возвращаем return если прогресс бар заполнен
+            if self.ui.progressBar.value() == 100:
+                self.ui.plainTextEdit.clear()
+                self.ui.plainTextEdit.appendPlainText('Список заполнен!')
+                return
+            # Проверяем есть ли элемент в списке
+            line_text = self.ui.lineEdit.text()
+            elements_count = self.ui.comboBox.count()
 
-    def clear_all(self):
-        self.ui.listWidget.clear()
-        self.number = 0
+            for element in range(0, elements_count):
+                self.ui.comboBox.setCurrentIndex(element)
+                local_text = self.ui.comboBox.currentText()
 
-    def add_tabel_item(self):
-        ID = None
-        NAME = None
-        AGE = None
+                if local_text == line_text:
+                    self.ui.plainTextEdit.appendPlainText('Объект уже есть в списке!')
+                    return
+
+            # Если ни одно из уловий выше не выполнилось - добавляем в comboBox
+            self.progres_value += 25
+            self.ui.comboBox.addItem(line_text)
+            self.ui.plainTextEdit.appendPlainText('Объект успешно добавлен.')
+            self.ui.progressBar.setValue(self.progres_value)
+        else:
+            self.ui.plainTextEdit.appendPlainText('Строка не может быть пустрой!')
         
-        if (len(self.ui.lineEdit.text()))>0:
-            ID = self.ui.lineEdit.text()
-        else: return
+    def clear_box(self):
+        self.progres_value = 0 
+        self.ui.comboBox.clear()
+        self.ui.plainTextEdit.clear()
+        self.ui.plainTextEdit.appendPlainText('Все объекты удалены!')
+        self.ui.progressBar.setValue(self.progres_value)
 
-        if (len(self.ui.lineEdit_2.text()))>0:
-            NAME = self.ui.lineEdit_2.text()
-        else: return
+    def set_style(self):
+        default_style = '''
+            QProgressBar{
 
-        if (len(self.ui.lineEdit_3.text()))>0:
-            AGE = self.ui.lineEdit_3.text()
-        else: return
+            }
+        '''
 
-        self.ui.tableWidget.setRowCount(self.row_count)
-        self.ui.tableWidget.setItem(self.tabel_index, 0, QtWidgets.QTableWidgetItem(ID))
-        self.ui.tableWidget.setItem(self.tabel_index, 1, QtWidgets.QTableWidgetItem(NAME))
-        self.ui.tableWidget.setItem(self.tabel_index, 2, QtWidgets.QTableWidgetItem(AGE))
-        
-        self.tabel_index += 1
-        self.row_count += 1
+        style = '''
+            QProgressBar::chunk{
+                background-color:red;
+                width: 10px;
+                margin: 1px;
+            }
+        '''
 
-    def clear_table(self):
-        self.tabel_index = 0
-        self.row_count = 1
-        self.ui.tableWidget.clear()
-        self.ui.tableWidget.setHorizontalHeaderItem(0, QtWidgets.QTableWidgetItem('ID'))
-        self.ui.tableWidget.setHorizontalHeaderItem(1, QtWidgets.QTableWidgetItem('Name'))
-        self.ui.tableWidget.setHorizontalHeaderItem(2, QtWidgets.QTableWidgetItem('Age'))
+        if not self.progres_flag:
+            self.ui.progressBar.setStyleSheet(style)
+            self.progres_flag = True
+        else:
+            self.ui.progressBar.setStyleSheet(default_style)
+            self.progres_flag= False
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

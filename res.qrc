@@ -1,8 +1,0 @@
-<RCC>
-  <qresource prefix="icon">
-    <file>python.ico</file>
-  </qresource>
-  <qresource prefix="image">
-    <file>Python.png</file>
-  </qresource>
-</RCC>

@@ -14,69 +14,116 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(709, 484)
-        MainWindow.setMinimumSize(QtCore.QSize(709, 484))
-        MainWindow.setMaximumSize(QtCore.QSize(709, 484))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/icon/python.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        MainWindow.setWindowIcon(icon)
+        MainWindow.resize(585, 298)
+        MainWindow.setMinimumSize(QtCore.QSize(585, 298))
+        MainWindow.setMaximumSize(QtCore.QSize(585, 298))
+        MainWindow.setStyleSheet("QMainWindow{\n"
+"background-color: #414141;\n"
+"}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.listWidget = QtWidgets.QListWidget(self.centralwidget)
-        self.listWidget.setGeometry(QtCore.QRect(10, 10, 301, 231))
-        self.listWidget.setObjectName("listWidget")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(20, 250, 291, 16))
-        self.label.setObjectName("label")
-        self.radioButton = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton.setGeometry(QtCore.QRect(20, 270, 41, 20))
-        self.radioButton.setObjectName("radioButton")
-        self.radioButton_2 = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton_2.setGeometry(QtCore.QRect(70, 270, 71, 20))
-        self.radioButton_2.setObjectName("radioButton_2")
-        self.radioButton_3 = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton_3.setGeometry(QtCore.QRect(140, 270, 71, 20))
-        self.radioButton_3.setObjectName("radioButton_3")
-        self.radioButton_4 = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton_4.setGeometry(QtCore.QRect(210, 270, 41, 20))
-        self.radioButton_4.setObjectName("radioButton_4")
-        self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(320, 10, 381, 231))
-        self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(3)
-        self.tableWidget.setRowCount(0)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(2, item)
+        self.comboBox = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox.setGeometry(QtCore.QRect(10, 10, 291, 41))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        font.setBold(True)
+        font.setWeight(75)
+        self.comboBox.setFont(font)
+        self.comboBox.setStyleSheet("border: 3px solid #777DB9;")
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit.setGeometry(QtCore.QRect(320, 260, 381, 31))
+        self.lineEdit.setGeometry(QtCore.QRect(10, 60, 291, 41))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        font.setBold(True)
+        font.setWeight(75)
+        self.lineEdit.setFont(font)
+        self.lineEdit.setStyleSheet("border: 3px solid #777DB9;")
         self.lineEdit.setObjectName("lineEdit")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(10, 380, 301, 41))
+        self.pushButton.setGeometry(QtCore.QRect(10, 110, 291, 41))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("QPushButton{\n"
+"border: 3px solid #777DB9;\n"
+"background-color: rgb(198, 198, 198);\n"
+"}\n"
+"QPushButton::hover {\n"
+"background-color: rgb(198, 198, 198);\n"
+"border: 0px\n"
+"}\n"
+"QPushButton::pressed{\n"
+"background-color: rgb(231, 231, 231);\n"
+"}")
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(10, 430, 301, 41))
+        self.pushButton_2.setGeometry(QtCore.QRect(10, 160, 291, 41))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_2.setFont(font)
+        self.pushButton_2.setStyleSheet("QPushButton{\n"
+"border: 3px solid #777DB9;\n"
+"background-color: rgb(198, 198, 198);\n"
+"}\n"
+"QPushButton::hover {\n"
+"background-color: rgb(198, 198, 198);\n"
+"border: 0px\n"
+"}\n"
+"QPushButton::pressed{\n"
+"background-color: rgb(231, 231, 231);\n"
+"}")
         self.pushButton_2.setObjectName("pushButton_2")
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_2.setGeometry(QtCore.QRect(320, 300, 381, 31))
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.lineEdit_3 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_3.setGeometry(QtCore.QRect(320, 340, 381, 31))
-        self.lineEdit_3.setObjectName("lineEdit_3")
+        self.plainTextEdit = QtWidgets.QPlainTextEdit(self.centralwidget)
+        self.plainTextEdit.setGeometry(QtCore.QRect(310, 10, 261, 191))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        font.setBold(True)
+        font.setWeight(75)
+        self.plainTextEdit.setFont(font)
+        self.plainTextEdit.setStyleSheet("border: 3px solid #777DB9;")
+        self.plainTextEdit.setPlainText("")
+        self.plainTextEdit.setOverwriteMode(False)
+        self.plainTextEdit.setObjectName("plainTextEdit")
+        self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
+        self.progressBar.setGeometry(QtCore.QRect(10, 210, 561, 31))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        font.setBold(True)
+        font.setWeight(75)
+        self.progressBar.setFont(font)
+        self.progressBar.setStyleSheet("border: 3px solid #777DB9;")
+        self.progressBar.setProperty("value", 24)
+        self.progressBar.setAlignment(QtCore.Qt.AlignCenter)
+        self.progressBar.setTextVisible(True)
+        self.progressBar.setOrientation(QtCore.Qt.Horizontal)
+        self.progressBar.setInvertedAppearance(False)
+        self.progressBar.setTextDirection(QtWidgets.QProgressBar.TopToBottom)
+        self.progressBar.setObjectName("progressBar")
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_3.setGeometry(QtCore.QRect(320, 380, 381, 41))
+        self.pushButton_3.setGeometry(QtCore.QRect(10, 250, 561, 41))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_3.setFont(font)
+        self.pushButton_3.setStyleSheet("QPushButton{\n"
+"border: 3px solid #777DB9;\n"
+"background-color: rgb(198, 198, 198);\n"
+"}\n"
+"QPushButton::hover {\n"
+"background-color: rgb(198, 198, 198);\n"
+"border: 0px\n"
+"}\n"
+"QPushButton::pressed{\n"
+"background-color: rgb(231, 231, 231);\n"
+"}")
         self.pushButton_3.setObjectName("pushButton_3")
-        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_4.setGeometry(QtCore.QRect(320, 430, 381, 41))
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(20, 300, 61, 61))
-        self.label_2.setStyleSheet("border-image: url(:/image/Python.png);")
-        self.label_2.setText("")
-        self.label_2.setObjectName("label_2")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -85,22 +132,9 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "Иконки:"))
-        self.radioButton.setText(_translate("MainWindow", "C#"))
-        self.radioButton_2.setText(_translate("MainWindow", "Python"))
-        self.radioButton_3.setText(_translate("MainWindow", "HTML"))
-        self.radioButton_4.setText(_translate("MainWindow", "PC"))
-        item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "ID"))
-        item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "Name"))
-        item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Age"))
-        self.lineEdit.setPlaceholderText(_translate("MainWindow", "ID"))
+        self.comboBox.setItemText(0, _translate("MainWindow", "example"))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow", "Название объекта"))
         self.pushButton.setText(_translate("MainWindow", "Добавить значение"))
-        self.pushButton_2.setText(_translate("MainWindow", "Удалить все значения"))
-        self.lineEdit_2.setPlaceholderText(_translate("MainWindow", "NAME"))
-        self.lineEdit_3.setPlaceholderText(_translate("MainWindow", "AGE"))
-        self.pushButton_3.setText(_translate("MainWindow", "Добавить значение"))
-        self.pushButton_4.setText(_translate("MainWindow", "Удалить все значения"))
-import res_rc
+        self.pushButton_2.setText(_translate("MainWindow", "Удалить значение"))
+        self.plainTextEdit.setPlaceholderText(_translate("MainWindow", "Лог программы..."))
+        self.pushButton_3.setText(_translate("MainWindow", "Изменить стиль ProgrssBar"))
