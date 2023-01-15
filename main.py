@@ -1,53 +1,82 @@
 import sys
-import time
-import random
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from ui import *
 
-class MyWin(QtWidgets.QMainWindow):
+
+class GUI(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.pushButton.clicked.connect(self.gettext)
-        self.ui.checkBox.clicked.connect(self.output)
 
-    def output(self):
-        name = self.ui.checkBox.text()
-        self.ui.radioButton.setText(str(random.randint(0, 100)))
-        print(name)
+        self.number = 0
 
-    def gettext(self):
-        if self.ui.checkBox.isChecked():
-            checkbox_1 = self.ui.checkBox.text()
-        else:
-            checkbox_1 = ''
+        self.ui.pushButton.clicked.connect(self.add_item)
+        self.ui.pushButton_2.clicked.connect(self.clear_all)
 
-        if self.ui.checkBox_2.isChecked():
-            checkbox_2 = self.ui.checkBox_2.text()
-        else:
-            checkbox_2 = ''
+        self.tabel_index = 0
+        self.row_count = 1
+        self.ui.pushButton_3.clicked.connect(self.add_tabel_item)
+        self.ui.pushButton_4.clicked.connect(self.clear_table)
 
-        if self.ui.radioButton.isChecked():
-            radiobutton_1 = self.ui.radioButton.text()
-        else:
-            radiobutton_1 = ''
+    def add_item(self):
+        radio_base = [
+            self.ui.radioButton, self.ui.radioButton_2,
+            self.ui.radioButton_3, self.ui.radioButton_4
+        ]
+        for radio in radio_base:
+            if radio.isChecked():
+                name = radio.text()
+                icon = QtGui.QIcon(f'{name}.png')
+                print(f'{name}.png')
+                self.ui.listWidget.addItem(f"{name} - {self.number}")
+                self.ui.listWidget.setCurrentRow(self.number)
+                item = self.ui.listWidget.currentItem()
+                item.setIcon(icon)
+                self.number += 1
 
-        if self.ui.radioButton_2.isChecked():
-            radiobutton_2 = self.ui.radioButton_2.text()
-        else:
-            radiobutton_2 = ''
+    def clear_all(self):
+        self.ui.listWidget.clear()
+        self.number = 0
 
-        result = f'{checkbox_1}{checkbox_2}{radiobutton_1}{radiobutton_2} Hello world'
-
-        self.ui.plainTextEdit.appendPlainText(result)      
+    def add_tabel_item(self):
+        ID = None
+        NAME = None
+        AGE = None
         
+        if (len(self.ui.lineEdit.text()))>0:
+            ID = self.ui.lineEdit.text()
+        else: return
+
+        if (len(self.ui.lineEdit_2.text()))>0:
+            NAME = self.ui.lineEdit_2.text()
+        else: return
+
+        if (len(self.ui.lineEdit_3.text()))>0:
+            AGE = self.ui.lineEdit_3.text()
+        else: return
+
+        self.ui.tableWidget.setRowCount(self.row_count)
+        self.ui.tableWidget.setItem(self.tabel_index, 0, QtWidgets.QTableWidgetItem(ID))
+        self.ui.tableWidget.setItem(self.tabel_index, 1, QtWidgets.QTableWidgetItem(NAME))
+        self.ui.tableWidget.setItem(self.tabel_index, 2, QtWidgets.QTableWidgetItem(AGE))
+        
+        self.tabel_index += 1
+        self.row_count += 1
+
+    def clear_table(self):
+        self.tabel_index = 0
+        self.row_count = 1
+        self.ui.tableWidget.clear()
+        self.ui.tableWidget.setHorizontalHeaderItem(0, QtWidgets.QTableWidgetItem('ID'))
+        self.ui.tableWidget.setHorizontalHeaderItem(1, QtWidgets.QTableWidgetItem('Name'))
+        self.ui.tableWidget.setHorizontalHeaderItem(2, QtWidgets.QTableWidgetItem('Age'))
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    myapp = MyWin()
+    myapp = GUI()
     myapp.show()
     sys.exit(app.exec_())
     
