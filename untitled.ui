@@ -6,64 +6,38 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>514</width>
-    <height>141</height>
+    <width>351</width>
+    <height>115</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>20</y>
-      <width>291</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Оповещение с подтверждением пользователя</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>151</width>
-      <height>51</height>
+      <x>10</x>
+      <y>40</y>
+      <width>161</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
-     <string>Вывести оповещение</string>
+     <string>Открыть окно</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>80</y>
-      <width>291</width>
-      <height>51</height>
+      <x>180</x>
+      <y>40</y>
+      <width>161</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
-     <string>Вывести подробное оповещение</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>340</x>
-      <y>80</y>
-      <width>151</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Вывести ошибку</string>
+     <string>Открыть окно QT</string>
     </property>
    </widget>
   </widget>
