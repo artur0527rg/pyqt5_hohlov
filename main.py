@@ -10,74 +10,63 @@ class GUI(QtWidgets.QMainWindow):
         QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
-        #Глобальные переменные
-        self.progres_flag = False
-        self.progres_value = 0
-        self.ui.progressBar.setValue(self.progres_value)
-
-        # Оброботчики кнопок
-        self.ui.pushButton.clicked.connect(self.add_item)
-        self.ui.pushButton_2.clicked.connect(self.clear_box)
-        self.ui.pushButton_3.clicked.connect(self.set_style)
-
-
-
-    def add_item(self):
-        if len(self.ui.lineEdit.text())>0:
-            # Возвращаем return если прогресс бар заполнен
-            if self.ui.progressBar.value() == 100:
-                self.ui.plainTextEdit.clear()
-                self.ui.plainTextEdit.appendPlainText('Список заполнен!')
-                return
-            # Проверяем есть ли элемент в списке
-            line_text = self.ui.lineEdit.text()
-            elements_count = self.ui.comboBox.count()
-
-            for element in range(0, elements_count):
-                self.ui.comboBox.setCurrentIndex(element)
-                local_text = self.ui.comboBox.currentText()
-
-                if local_text == line_text:
-                    self.ui.plainTextEdit.appendPlainText('Объект уже есть в списке!')
-                    return
-
-            # Если ни одно из уловий выше не выполнилось - добавляем в comboBox
-            self.progres_value += 25
-            self.ui.comboBox.addItem(line_text)
-            self.ui.plainTextEdit.appendPlainText('Объект успешно добавлен.')
-            self.ui.progressBar.setValue(self.progres_value)
-        else:
-            self.ui.plainTextEdit.appendPlainText('Строка не может быть пустрой!')
+        self.ui.pushButton.clicked.connect(self.notification)
+        self.ui.pushButton_2.clicked.connect(self.confirm)
+        self.ui.pushButton_3.clicked.connect(self.message)
+        self.ui.pushButton_4.clicked.connect(self.error_message)
         
-    def clear_box(self):
-        self.progres_value = 0 
-        self.ui.comboBox.clear()
-        self.ui.plainTextEdit.clear()
-        self.ui.plainTextEdit.appendPlainText('Все объекты удалены!')
-        self.ui.progressBar.setValue(self.progres_value)
+    def notification(self):
+        # Вызво оповещения
+        QtWidgets.QMessageBox.about(self, 'title', 'message')
+        QtWidgets.QMessageBox.warning(self, 'title', 'message')
+        QtWidgets.QMessageBox.information(self, 'title', 'message')
+        QtWidgets.QMessageBox.critical(self, 'title', 'message')
 
-    def set_style(self):
-        default_style = '''
-            QProgressBar{
+    def confirm(self):
+        result = QtWidgets.QMessageBox.question(
+            self,
+            'Header',
+            'Discription...',
+            QtWidgets.QMessageBox.Yes,
+            QtWidgets.QMessageBox.No
+        )
 
-            }
-        '''
-
-        style = '''
-            QProgressBar::chunk{
-                background-color:red;
-                width: 10px;
-                margin: 1px;
-            }
-        '''
-
-        if not self.progres_flag:
-            self.ui.progressBar.setStyleSheet(style)
-            self.progres_flag = True
+        if result == QtWidgets.QMessageBox.Yes:
+            print('Yes')
         else:
-            self.ui.progressBar.setStyleSheet(default_style)
-            self.progres_flag= False
+            print('No')
+
+        # QtWidgets.QMessageBox.Ok
+        # QtWidgets.QMessageBox.Open
+        # QtWidgets.QMessageBox.Save
+        # QtWidgets.QMessageBox.Cancel
+        # QtWidgets.QMessageBox.Close
+        # QtWidgets.QMessageBox.Yes
+        # QtWidgets.QMessageBox.No
+        # QtWidgets.QMessageBox.Abort
+        # QtWidgets.QMessageBox.Retry
+        # QtWidgets.QMessageBox.Ignore
+
+    def message(self):
+        # Вывод подробного сообщения с доп.инфо.
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Critical)
+        msg.setWindowTitle('title')
+        msg.setInformativeText('desroption')
+        msg.setDetailedText('detailed...')
+        msg.setStandardButtons(QtWidgets.QMessageBox.Ok | QtWidgets.QMessageBox.Cancel)
+        item = msg.exec_()
+
+        if item == QtWidgets.QMessageBox.Ok:
+            print('Ok')
+        elif item == QtWidgets.QMessageBox.Cancel:
+            print('Cancel')
+
+    def error_message(self):
+        # Ошибка которая дает возможность отключить ее повторный вывод
+        error = QtWidgets.QErrorMessage(self)
+        error.setWindowTitle('Title')
+        error.showMessage('error_message')
 
 
 if __name__ == "__main__":
