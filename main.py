@@ -39,6 +39,28 @@ class GUI(QtWidgets.QMainWindow):
         for i in value:
             self.ui.plainTextEdit.appendPlainText(str(i))
 
+
+    def closeEvent(self, value):
+        result = QtWidgets.QMessageBox.question(
+            self,
+            'Оповещение',
+            'Закрыть программу?',
+            QtWidgets.QMessageBox.Yes |
+            QtWidgets.QMessageBox.No
+        )
+
+        if result == QtWidgets.QMessageBox.No:
+            value.ignore()
+
+    def event(self, value):
+        if value.type() == QtCore.QEvent.KeyPress:
+            text = f'Нажата клавиша: {value.text()}'
+            self.ui.plainTextEdit.appendPlainText(text)
+        elif value.type() == QtCore.QEvent.MouseButtonPress:
+            text = f'Координаты нажатия {value.x()}, {value.y()}'
+            self.ui.plainTextEdit.appendPlainText(text)
+        return QtWidgets.QWidget.event(self, value)
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     myapp = GUI()
